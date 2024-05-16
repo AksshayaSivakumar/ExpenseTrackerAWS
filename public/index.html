@@ -76,7 +76,7 @@
  console.log(expensedetail)
  const token=localStorage.getItem('token')
 
- await axios.post("http://35.154.29.238/expense/submitexpense",expensedetail,{headers:{'Authorization':token}})
+ await axios.post("http://35.154.29.238:3004/expense/submitexpense",expensedetail,{headers:{'Authorization':token}})
 .then(response=>{
     if(response.status===201)
     {
@@ -121,7 +121,7 @@
         const token=localStorage.getItem('token')
         const itemsPerPage=5;
         var page=1;
-        const res=await axios.get(`http://35.154.29.238/expense/get-expense?page-${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}})
+        const res=await axios.get(`http://35.154.29.238:3004/expense/get-expense?page-${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}})
         const decodeToken=parseJwt(token);
         const ispremiumuser=decodeToken.ispremiumuser
         console.log(decodeToken)
@@ -149,7 +149,7 @@
         const itemsPerPage=5;
         console.log(page);
         console.log(itemsPerPage);
-        const res = await axios.get(`http://35.154.29.238/expense/get-expense?page=${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}});
+        const res = await axios.get(`http://35.154.29.238:3004/expense/get-expense?page=${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}});
         
         console.log(res.data);
         ShowExpenseOnScreen(res.data.allExpenses)
@@ -233,7 +233,7 @@
          try {
             const token=localStorage.getItem('token')
 
-        await axios.delete(`http://35.154.29.238/expense/delete-expense/${expenseid}`,{headers:{'Authorization':token}});
+        await axios.delete(`http://35.154.29.238:3004/expense/delete-expense/${expenseid}`,{headers:{'Authorization':token}});
         removeFromScreen(expenseid);
     } catch (err) {
         document.body.innerHTML= document.body.innerHTML+"<h4>Something Went Wrong</h4>"
@@ -262,7 +262,7 @@
         inputElement.onclick=async()=>{
             document.getElementById('listOfExpenses').style.visibility = "hidden"
             const token=localStorage.getItem('token')
-            const userLeaderBoardArray=await axios.get("http://35.154.29.238/premium/showLeaderBoard",{headers:{'Authorization':token}})
+            const userLeaderBoardArray=await axios.get("http://35.154.29.238:3004/premium/showLeaderBoard",{headers:{'Authorization':token}})
             console.log( userLeaderBoardArray.data)
     //         var leaderBoardElem=document.getElementById('leaderboard') 
     //         userLeaderBoardArray.data.forEach(userDetail=> {
@@ -303,7 +303,7 @@
     {  
             const token=localStorage.getItem('token')
 
-        await axios.get("http://35.154.29.238/expense/download",{headers:{'Authorization':token}})
+        await axios.get("http://35.154.29.238:3004/expense/download",{headers:{'Authorization':token}})
         .then(response=>{
             if(response.status===200)
             {
@@ -325,14 +325,14 @@
     
     document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token')
-    const response = await axios.get('http://35.154.29.238/purchase/premiummembership', { headers: { "Authorization": token } });
+    const response = await axios.get('http://35.154.29.238:3004/purchase/premiummembership', { headers: { "Authorization": token } });
     console.log(response)
 
     var options = {
         "key": response.data.key_id,
         "order_id": response.data.order.id,
         "handler": async function (response) {
-            const res = await axios.post('http://35.154.29.238/purchase/updatetransactionstatus', {
+            const res = await axios.post('http://35.154.29.238:3004/purchase/updatetransactionstatus', {
                 order_id: options.order_id,
                 payment_id: response.razorpay_payment_id,
             }, { headers: { "Authorization": token } })
