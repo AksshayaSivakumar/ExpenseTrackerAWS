@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image:url("https://homefamily.net/wp-content/uploads/2020/12/Tracking-expenses-and-record-keeping-scaled.jpg");
+    background-repeat:no-repeat;
+    
+    background-attachment:fixed;
+    background-size: 1400px 650px;
+   
+}
+    
+
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+h4 {
+    color: white; 
+    
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #666;
+}
+
+
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.buy-premium-btn {
+    font-style:italic;
+    display:block;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed; /* Fixed positioning */
+    top: 15px; /* Distance from the top */
+    right: 0; /* Distance from the right */
+    margin: 20px; /* Optional margin for better spacing */
+    float:right;
+    width:10%
+  }
+
+  .download-btn{
+    font-style:italic;
+    display:block;
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: fixed; /* Fixed positioning */
+    top: 15px; /* Distance from the top */
+    right: 200px; /* Distance from the right */
+    margin: 20px; /* Optional margin for better spacing */
+    float:right;
+    width:10% 
+  }
+  .list-group {
+    max-width: 400px;
+    margin: auto;
+}
+.badge {
+    background-color: #007bff; /* Bootstrap primary color */
+}
+#pagination {
+display: flex;
+gap: 10px; 
+width:5%;
+
+margin:auto;
+
+}
+.pagination-btn {
+flex: 1; 
+
+}
+
+
+
+/* Custom CSS for leaderboard table */
+.table {
+    width: 25%; /* Adjust the width of the table as needed */
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left: 35%;
+    margin-right: 65%;
+   
+}
+
+/* Optional: Customize other table elements */
+.table th, .table td {
+    padding: 10px; /* Adjust cell padding as needed */
+    border: 1px solid #dddddd;
+    text-align: center;
+}
+
+/* Optional: Customize table header */
+.table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* Optional: Customize table rows */
+.table tbody {
+    background-color: #f9f9f9;
+}
+   
+  
