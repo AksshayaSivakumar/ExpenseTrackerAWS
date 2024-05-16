@@ -32,11 +32,7 @@ app.use(express.json());
 
 // Use your user routes
 
-app.use((req,res,next)=>{
-    console.log('url',req.url);
-    console.log('Updated req.url');
-    res.sendFile(path.join(__dirname,`public/${req.url}`))
-});
+
 app.use('/user', userRoutes);
 app.use('/expense',expenseRoutes);
 app.use('/purchase',purchaseRoutes);
