@@ -24,8 +24,10 @@ const forgotPassword = async (req, res) => {
 
     if (user) {
       const id = uuid.v4();
+      console.log(id);
       user.createForgotpassword({ id, active: true }).catch((err) => {
         throw new Error(err);
+        
       });
 
       const client = Sib.ApiClient.instance;
