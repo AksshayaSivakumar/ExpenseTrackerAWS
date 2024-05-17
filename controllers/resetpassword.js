@@ -20,7 +20,7 @@ const passwordresetform = async (req, res) => {
 const forgotPassword = async (req, res) => {
   try {
     const email = req.body.email;
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email:email } });
 
     if (user) {
       const id = uuid.v4();
@@ -36,7 +36,7 @@ const forgotPassword = async (req, res) => {
 
       const sender = {
         email: "aksshayapugal@gmail.com",
-        name: "Aksshaya",
+        name: "Expense Tracker-Admin",
       };
 
       const recievers = [
