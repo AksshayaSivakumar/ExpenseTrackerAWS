@@ -23,6 +23,7 @@ const signUp=async(req, res) =>{
     
     try {
       const { name, email, password } = req.body;
+      
       console.log({ name, email, password })
       if (isStringInvalid(name) || isStringInvalid(email) || isStringInvalid(password)) {
         return res.status(400).json({ err: "Bad parameters. Something is missing" });

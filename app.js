@@ -1,4 +1,3 @@
-const path = require('path');
 
 const express = require('express');
 const cors = require('cors');
@@ -22,7 +21,7 @@ const Order = require('./models/order');
 const  Forgotpassword = require('./models/forgotpassword');
 
 
-dotenv.config();              
+             
 const app = express();
 
 app.use(cors());
