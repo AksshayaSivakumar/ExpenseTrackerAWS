@@ -1,23 +1,17 @@
-const sequelize = require("../util/database");
-const Sequelize = require('sequelize');
-const User=require('../models/user');
-const Expense=require('../models/expense');
+const mongoose = require('mongoose');
+const User = require('../models/user');
+const Expense = require('../models/expense');
 
-const getUserLeaderBoard=async(req,res)=>{
-    try{
-        const leaderboardofusers=await User.findAll({
-            
-            order:[['totalexpense','DESC']]
-        })
-        res.status(200).json(leaderboardofusers)
+const getUserLeaderBoard = async (req, res) => {
+  try {
+    const leaderboardOfusers = await User.find().sort({ totalexpense: -1 });
+    res.status(200).json(leaderboardOfusers);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
 
-    }
-    catch(err){
-       console.log(err)
-       res.status(500).json(err)
-    }
-}
-module.exports={
-    getUserLeaderBoard
-    
-}
+module.exports = {
+  getUserLeaderBoard
+};

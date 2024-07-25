@@ -2,9 +2,10 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 dotenv.config();
-const sequelize = require('./util/database'); 
+
 
 
 
@@ -38,24 +39,12 @@ app.use('/purchase',purchaseRoutes);
 app.use('/premium',premiumFeatureRoutes);
 app.use('/password',forgotPasswordRoute);
 
-
-
-
-User.hasMany(Expense);
-Expense.belongsTo(User);
-
-User.hasMany(Order);
-Order.belongsTo(User);
-
-User.hasMany(Forgotpassword);
-Forgotpassword.belongsTo(User)
-
-sequelize
-.sync()
-//.sync({force:true})
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-        app.listen(3004);
+        app.listen(3004, () => {
+            console.log('Server is running on port 3004');
+        });
     })
     .catch(err => {
         console.log(err);
-    })
+    });

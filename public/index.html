@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+ <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracker</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link rel="stylesheet" href="../index.css">
-</head>
-<body >
+ </head>
+     <body >
    
     <header>
         <br>
@@ -58,7 +58,7 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js" integrity="sha512-b94Z6431JyXY14iSXwgzeZurHHRNkLt9d6bAHt7BZT38eqV+GyngIi/tVye4jBKPYQ2lBdRs0glww4fmpuLRwA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-<script>
+ <script>
     
         
    async function SubmitExpense(e)
@@ -76,7 +76,7 @@
  console.log(expensedetail)
  const token=localStorage.getItem('token')
 
- await axios.post("http://35.154.29.238:3004/expense/submitexpense",expensedetail,{headers:{'Authorization':token}})
+ await axios.post("http://localhost:3004/expense/submitexpense",expensedetail,{headers:{'Authorization':token}})
 .then(response=>{
     if(response.status===201)
     {
@@ -121,7 +121,7 @@
         const token=localStorage.getItem('token')
         const itemsPerPage=5;
         var page=1;
-        const res=await axios.get(`http://35.154.29.238:3004/expense/get-expense?page-${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}})
+        const res=await axios.get(`http://localhost:3004/expense/get-expense?page-${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}})
         const decodeToken=parseJwt(token);
         const ispremiumuser=decodeToken.ispremiumuser
         console.log(decodeToken)
@@ -149,7 +149,7 @@
         const itemsPerPage=5;
         console.log(page);
         console.log(itemsPerPage);
-        const res = await axios.get(`http://35.154.29.238:3004/expense/get-expense?page=${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}});
+        const res = await axios.get(`http://localhost:3004/expense/get-expense?page=${page}&itemsPerPage=${itemsPerPage}`,{headers:{"Authorization":token}});
         
         console.log(res.data);
         ShowExpenseOnScreen(res.data.allExpenses)
@@ -198,42 +198,34 @@
 
     }
         
-//--------------------------------------------------------------------------------------------------------------    
-// function handlePagination(e) {
-//     if (e.target.classList.contains('pagination-btn')) {
-//         const newPage = parseInt(e.target.getAttribute('data-page'));
-//         if (newPage !== currentPage) {
-//             currentPage = newPage;
-//             getExpenses(currentPage);
-//             localStorage.setItem('currentPage', currentPage);
-//         }
-//     }
-// }
-//-----------------------------------------------------------------------------------------------------------    
+
  function addNewExpensetoUI(expense){
     document.getElementById('listOfExpenses').style.visibility = "visible"
     const parentElement = document.getElementById('listOfExpenses');
-    const expenseElemId = `expense-${expense.id}`;
+    const expenseElemId = `expense-${expense._id}`;
     const listItem = document.createElement("li");
  listItem.id = expenseElemId;
  listItem.className = "list-group-item d-flex justify-content-between align-items-center";
- listItem.style="margin:2px"
- listItem.style="right:150px"
+ listItem.style.margin = "2px";
+ listItem.style.right = "150px";
  listItem.innerHTML = `
     <span> ${expense.category} - ${expense.description} - $${expense.expenseamount}</span>
-    <button onclick='deleteExpense(event, ${expense.id})' class="btn btn-success btn-sm"; style="width:auto";>
+    <button onclick='deleteExpense("${expense._id}")' class="btn btn-success btn-sm"; style="width:auto">
         Delete Expense
     </button>
 `;
+
  parentElement.appendChild(listItem);
  }
 
 //-------------------------------------------------------------------------------------------------------------
  async function deleteExpense(expenseid){
+    
          try {
             const token=localStorage.getItem('token')
-
-        await axios.delete(`http://35.154.29.238:3004/expense/delete-expense/${expenseid}`,{headers:{'Authorization':token}});
+           
+        await axios.delete(`http://localhost:3004/expense/delete-expense/${expenseid}`,{headers:{'Authorization':token}});
+        
         removeFromScreen(expenseid);
     } catch (err) {
         document.body.innerHTML= document.body.innerHTML+"<h4>Something Went Wrong</h4>"
@@ -262,16 +254,9 @@
         inputElement.onclick=async()=>{
             document.getElementById('listOfExpenses').style.visibility = "hidden"
             const token=localStorage.getItem('token')
-            const userLeaderBoardArray=await axios.get("http://35.154.29.238:3004/premium/showLeaderBoard",{headers:{'Authorization':token}})
+            const userLeaderBoardArray=await axios.get("http://localhost:3004/premium/showLeaderBoard",{headers:{'Authorization':token}})
             console.log( userLeaderBoardArray.data)
-    //         var leaderBoardElem=document.getElementById('leaderboard') 
-    //         userLeaderBoardArray.data.forEach(userDetail=> {
-    //             leaderBoardElem.className = "container";
-    //             leaderBoardElem.innerHTML+=`<span>Name:${userDetail.name}   Total Expense:$${userDetail.totalexpense} </span>`
-                    
-    //         });
-
-    //     }
+   
         document.getElementById('message').appendChild(inputElement)
         const table = document.createElement("table");
     table.className = "table";
@@ -303,7 +288,7 @@
     {  
             const token=localStorage.getItem('token')
 
-        await axios.get("http://35.154.29.238:3004/expense/download",{headers:{'Authorization':token}})
+        await axios.get("http://localhost:3004/expense/download",{headers:{'Authorization':token}})
         .then(response=>{
             if(response.status===200)
             {
@@ -325,14 +310,14 @@
     
     document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token')
-    const response = await axios.get('http://35.154.29.238:3004/purchase/premiummembership', { headers: { "Authorization": token } });
+    const response = await axios.get('http://localhost:3004/purchase/premiummembership', { headers: { "Authorization": token } });
     console.log(response)
 
     var options = {
         "key": response.data.key_id,
         "order_id": response.data.order.id,
         "handler": async function (response) {
-            const res = await axios.post('http://35.154.29.238:3004/purchase/updatetransactionstatus', {
+            const res = await axios.post('http://localhost:3004/purchase/updatetransactionstatus', {
                 order_id: options.order_id,
                 payment_id: response.razorpay_payment_id,
             }, { headers: { "Authorization": token } })
@@ -360,7 +345,6 @@
     
     
     
-</script>
-    
-</body>
+ </script>
+ </body>
 </html>

@@ -42,7 +42,7 @@
                 password:e.target.password.value
                }
 
-               await axios.post("http://35.154.29.238:3004/user/loginpage",logindata)
+               await axios.post("http://localhost:3004/user/loginpage",logindata)
                .then(response=>{
                 
                 alert(response.data.message);
